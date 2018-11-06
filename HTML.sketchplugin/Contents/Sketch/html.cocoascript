@@ -289,7 +289,8 @@ function Exporter(context) {
 
 	// Generate Header CSS
 	function generateBoilerPlateCSS() {
-		var css = ".sk-ab {\n"
+		var css = "body{\nmargin: 0;\n}\n"
+		+".sk-ab {\n"
 		+ "\tposition: relative;\n"
 		+ "\toverflow: hidden;\n"
 		+ "}\n";
@@ -299,7 +300,7 @@ function Exporter(context) {
 		css += ".sk-asset {\n"
 		+ "\tposition: absolute;\n"
 		+ "\tbackground-repeat: no-repeat;\n"
-		+ "\tbackground-size: cover;\n"
+		+ "\tbackground-size: contain;\n"
 		+ "}\n";
 
 		return css;
