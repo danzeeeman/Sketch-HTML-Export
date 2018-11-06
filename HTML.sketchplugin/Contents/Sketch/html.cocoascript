@@ -145,7 +145,7 @@ function Exporter(context) {
 		css += "\n";
 
 		exportLayers[artboard].forEach(function(layer) {
-			css += generateCSSForLayer(layer);
+			css += generateCSSForLayer(layer, artboard);
 		});
 
 		return css;
@@ -246,12 +246,12 @@ function Exporter(context) {
 		return str;
 	}
 
-	function generateCSSForLayer(layer) {
+	function generateCSSForLayer(layer, artboard) {
 		var css = ".sk-asset.sk-" + cleanString(layer.name()) + " {\n";
-		css += "\twidth: " + Math.round(layer.frame().width()) + "px;\n";
-		css += "\theight: " + Math.round(layer.frame().height()) + "px;\n";
-		css += "\tleft: " + Math.round(layer.frame().x()) + "px;\n";
-		css += "\ttop: " + Math.round(layer.frame().y()) + "px;\n";
+		css += "\twidth: " + Math.round(layer.frame().width()/artboard.frame().width()*100) + "vw;\n";
+		css += "\theight: " + Math.round(layer.frame().height()/artboard.frame().width()*100) + "vw;\n";
+		css += "\tleft: " + Math.round(layer.frame().x()/artboard.frame().width()*100) + "vw;\n";
+		css += "\ttop: " + Math.round(layer.frame().y()/artboard.frame().width()*100) + "vw;\n";
 
 		// Set background image for exported layer
 		if (layerMarkedForExport(layer) && !embedSvg) {
@@ -299,6 +299,7 @@ function Exporter(context) {
 		css += ".sk-asset {\n"
 		+ "\tposition: absolute;\n"
 		+ "\tbackground-repeat: no-repeat;\n"
+		+ "\tbackground-size: cover;\n"
 		+ "}\n";
 
 		return css;
@@ -312,8 +313,8 @@ function Exporter(context) {
 			css += "\tbackground-color: " + hexColor(artboard.backgroundColor()) + ";\n";
 		}
 
-		css += "\twidth: " + Math.round(artboard.frame().width()) + "px;\n";
-		css += "\theight: " + Math.round(artboard.frame().height()) + "px;\n";
+		css += "\twidth: " + Math.round(artboard.frame().width()/artboard.frame().width()*100) + "vw;\n";
+		css += "\theight: " + Math.round(artboard.frame().height()/artboard.frame().width()*100) + "vw;\n";
 
 		css += "}\n";
 
